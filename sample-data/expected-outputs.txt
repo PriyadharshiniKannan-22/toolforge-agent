@@ -1,0 +1,12 @@
+Current time: 09:45 PM
+
+Current weather:
+31°C
+Humidity: 74%
+
+Students:
+Priya - 9.1
+Rahul - 8.8
+
+Highest CGPA:
+Priya (9.1)
