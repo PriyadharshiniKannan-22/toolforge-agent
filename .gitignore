@@ -1,0 +1,29 @@
+# Build outputs
+
+bin/
+obj/
+
+# Logs
+
+*.log
+build.log
+
+# Environment variables
+
+.env
+
+# Database (auto-generated at startup)
+
+toolforge.db
+
+# IDE files
+
+.vs/
+.idea/
+*.user
+*.suo
+
+# OS files
+
+.DS_Store
+Thumbs.db
