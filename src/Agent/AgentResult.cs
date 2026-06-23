@@ -9,4 +9,6 @@ public class AgentResult
     public int OutputTokens { get; set; }
 
     public int ToolCalls { get; set; }
+
+    public long LatencyMs { get; set; }
 }

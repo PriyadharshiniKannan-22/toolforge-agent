@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json.Nodes;
+using System.Diagnostics;
 
 namespace ToolForge.Agent;
 
@@ -30,6 +31,8 @@ public class AgentLoop
 
     public async Task<AgentResult> RunAsync(string userInput)
     {
+        var stopwatch = Stopwatch.StartNew();
+
         var messages = new JsonArray
         {
             new JsonObject
@@ -128,6 +131,7 @@ public class AgentLoop
 
             if (finishReason == "stop")
             {
+                stopwatch.Stop();
                 return new AgentResult
                 {
                     Reply =
@@ -136,7 +140,8 @@ public class AgentLoop
 
                     InputTokens = totalInputTokens,
                     OutputTokens = totalOutputTokens,
-                    ToolCalls = toolCalls
+                    ToolCalls = toolCalls,
+                    LatencyMs = stopwatch.ElapsedMilliseconds
                 };
             }
 
@@ -221,21 +226,25 @@ public class AgentLoop
                 continue;
             }
 
+            stopwatch.Stop();
             return new AgentResult
             {
                 Reply = "Unexpected finish reason.",
                 InputTokens = totalInputTokens,
                 OutputTokens = totalOutputTokens,
-                ToolCalls = toolCalls
+                ToolCalls = toolCalls,
+                LatencyMs = stopwatch.ElapsedMilliseconds
             };
         }
 
+        stopwatch.Stop();
         return new AgentResult
         {
             Reply = "Agent stopped after max iterations.",
             InputTokens = totalInputTokens,
             OutputTokens = totalOutputTokens,
-            ToolCalls = toolCalls
+            ToolCalls = toolCalls,
+            LatencyMs = stopwatch.ElapsedMilliseconds
         };
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ToolForge.Agent;
 using ToolForge.Api.Models;
+using System.Diagnostics;
 
 namespace ToolForge.Api;
 
@@ -29,8 +30,16 @@ public class ChatController : ControllerBase
 
         try
         {
+            var stopwatch = Stopwatch.StartNew();
+
             var result =
                 await _agent.RunAsync(request.Message);
+
+            stopwatch.Stop();
+
+            Console.WriteLine(
+                $"Request completed in {stopwatch.ElapsedMilliseconds} ms"
+            );
 
             return Ok(new
             {
@@ -40,7 +49,8 @@ public class ChatController : ControllerBase
                 {
                     inputTokens = result.InputTokens,
                     outputTokens = result.OutputTokens,
-                    toolCalls = result.ToolCalls
+                    toolCalls = result.ToolCalls,
+                    latencyMs = result.LatencyMs
                 }
             });
         }
