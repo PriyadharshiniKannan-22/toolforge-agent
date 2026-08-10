@@ -9,7 +9,7 @@ public class AgentLoop
     private readonly HttpClient _http;
     private readonly ToolRegistry _tools;
     private readonly string _apiKey;
-    private readonly string _model = "meta-llama/llama-4-maverick-17b-128e-instruct-fp8";
+    private readonly string _model = "openai/gpt-oss-120b";
 
     public AgentLoop(ToolRegistry tools)
     {
