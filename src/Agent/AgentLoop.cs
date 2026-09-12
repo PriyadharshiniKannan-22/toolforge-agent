@@ -9,7 +9,7 @@ public class AgentLoop
     private readonly HttpClient _http;
     private readonly ToolRegistry _tools;
     private readonly string _apiKey;
-    private readonly string _model = "meta-llama/llama-4-scout-17b-16e-instruct";
+    private readonly string _model = "meta-llama/Llama-4-Scout-17B-16E-Instruct";
 
     public AgentLoop(ToolRegistry tools)
     {
